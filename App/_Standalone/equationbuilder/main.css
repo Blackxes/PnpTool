@@ -219,13 +219,3 @@ body { color: #000; background: #fff; font-family: "Roboto"; }
 
 .container-box { padding: 10px; border: 1px solid #ccc; }
 .left { margin-right: 50px; }
-
-.roll-groups { grid-template-columns: repeat(5, 1fr); }
-.roll-groups .list-item { border: 1px solid #777; font-size: 14px; text-align: center; }
-.roll-items { grid-template-columns: repeat(5, 1fr); }
-.roll-item{ color: #000; text-align: center; }
-
-.history-item { margin-bottom: 0; padding: 10px 0; border-bottom: 1px solid #ccc; }
-.history-item .roll-title { padding: 5px 10px; }
-.history-item .groups { padding: 0 10px; }
-.history-item .group-item { padding: 5px; }

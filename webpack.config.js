@@ -1,10 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Webpack = require('webpack');
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'app/index.tsx')
+        app: path.resolve(__dirname, 'App/index.jsx')
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -25,5 +24,14 @@ module.exports = {
                 use: 'babel-loader'
             }
         ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'App/Templates/template.html'),
+            filename: path.resolve(__dirname, 'Dist/index.html')
+        })
+    ],
+    devServer: {
+        contentBase: path.resolve(__dirname, 'app/')
     }
 };

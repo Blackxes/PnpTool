@@ -1,0 +1,20 @@
+.text {
+	&-sub { font-size: 12px; font-style: italic; color: #6c6c6c; }
+	&-dark { color: $bgTertiary; }
+	&-center { text-align: center; }
+	&-reverse { background: $bgPrimaryComp; color: #000; }
+	&-title { padding: 10px 15px; display: inline-block; font-size: 18px; background: $bgSecondary; }
+	&-shortened { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+.msg {
+	&-ok { color: $okColor !important; }
+	&-error { color: $errorColor !important; }
+	&-warning { color: $warningColor !important; }
+	&-info { color: $infoColor !important; }
+}
+
+.value {
+	&-true { color: $okColor; }
+	&-false { color: $errorColor; }
+}
