@@ -19,13 +19,13 @@ const initialState = {
 const Dice = (state = initialState, { type, pl }) => {
     switch (type) {
         case 'set-min-range':
-            return { ...state, rangeMin: pl.value };
+            return { ...state, rangeMin: pl || 0 };
         case 'set-max-range':
-            return { ...state, rangeMax: pl.value };
+            return { ...state, rangeMax: pl };
         case 'set-current-roll-name':
-            return { ...state, currentRollName: pl.value };
+            return { ...state, currentRollName: pl || undefined };
         case 'set-selected-roll':
-            return { ...state, selectedRoll: pl.value };
+            return { ...state, selectedRoll: pl || undefined };
         case 'add-roll-to-history':
             return addToState(state, 'rollHistory', pl);
         case 'remove-roll-from-history':

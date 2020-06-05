@@ -7,16 +7,12 @@
 
 import { combineReducers } from 'redux';
 
-import meta from './states/meta/reducer.js';
-import tempData from './states/tempdata/reducer.js';
-
-import monster from './states/monster/reducer.js';
-import powerRank from './states/powerrank/reducer.js';
-import rarity from './states/rarity/reducer.js';
+import Dice from './Source/Dice/reducer';
+import FlatData from './Source/FlatData/reducer';
 
 const reducers = {
-    meta,
-    tempData
+    Dice,
+    FlatData
 };
 
 export default !Object.keys(reducers).length

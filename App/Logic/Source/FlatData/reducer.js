@@ -59,6 +59,8 @@ const FlatData = (state = initialState, { type, pl }) => {
         case 'update-form-sheet-option':
             return updateInState(state, 'formSheetOptions', pl);
     }
+
+    return state;
 };
 
 export default FlatData;
