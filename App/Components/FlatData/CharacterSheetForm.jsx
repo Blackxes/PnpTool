@@ -73,13 +73,48 @@ const defaultProps = {
 //     );
 // };
 
-const AttributeAddedListItemValue = ({ Attribute, OnRemove, OnChange }) => {};
+const CharacterSheetAttributeValue = ({ Attribute, OnChange }) => {
+    const { id, defaultValue } = Attribute;
+    const FieldName = 'attribute' + id;
 
-const PreviewAttributeListItemValue = ({ Attribute, OnAdd }) => {};
+    return (
+        <Field name={FieldName} component="input" defaultValue={defaultValue}>
+            {({ input }) => (
+                <input
+                    {...input}
+                    className="attribute-value list-item col col-4"
+                    placeholder={defaultValue}
+                    onChange={(evt) => OnChange(evt, Attribute)}
+                />
+            )}
+        </Field>
+    );
+};
 
-const AttributeListItem = ({
-    IsPreview,
+const PreviewAttributeListItemValue = ({ AttributeBase, OnAdd }) => {};
+
+const AttributeListItemHeader = ({ Attribute }) => {
+    const { id, name, description } = Attribute;
+
+    return (
+        <div key={id} className="list-item flex flex-h flex-align">
+            <div className="list-item col col-4 flex flex-v">
+                <p className="attribute-title">{name}</p>
+                <p className="attribute-description text-sub">
+                    {description || 'Keine Beschreibung'}
+                </p>
+            </div>
+        </div>
+    );
+};
+
+/**
+ * general list item which either can represent a previewed attribute base
+ * or an added attribute to the charactersheet therefore an charactersheet attribute
+ */
+const CharacterSheetAttributeListItem = ({
     Attribute,
+    IsPreview,
     OnAdd,
     OnRemove,
     OnChange,
@@ -87,14 +122,14 @@ const AttributeListItem = ({
 }) => {
     return (
         <React.Fragment>
-            <div key={aitem.id} className="list-item flex flex-h flex-align">
-                <div className="list-item col col-4 flex flex-v">
-                    <p className="attribute-title">{aitem.name}</p>
-                    <p className="attribute-description text-sub">
-                        {aitem.description || 'Keine Beschreibung'}
-                    </p>
-                </div>
-            </div>
+            <AttributeListItemHeader Attribute={Attribute} />
+            {IsPreview ? (
+                <CharacterSheetAttributeValue />
+            ) : (
+                <AttributePreviewField />
+            )}
+
+            {/* <div className="">
             {IsPreview ? (
                 <PreviewAttributeListItemValue
                     Attribute={Attribute}
@@ -103,17 +138,17 @@ const AttributeListItem = ({
             ) : (
                 <AttributeAddedListItemValue
                     Attribute={Attribute}
-                    OnRemove={OnRemove}
                 />
             )}
+			</div>
             <div className="col col-4">
                 <div
                     className="list-item flex-end btn btn-error btn-wide"
-                    onClick={}
+                    onClick={IsPreview ? OnAdd(Attribute.id) : OnRemove}
                 >
                     <p>{ActionLabel}</p>
                 </div>
-            </div>
+            </div> */}
         </React.Fragment>
     );
 };
@@ -126,22 +161,7 @@ const ListItemAddedAttribute = ({ Attribute, OnRemove, OnChange }) => {
                 {aitem.description || 'Keine Beschreibung'}{' '}
             </p>
         </div>
-        <Field
-            name={`attribute-${aitem.id}`}
-            component="input"
-            defaultValue={aitem.defaultValue}
-        >
-            {({ input }) => (
-                <input
-                    {...input}
-                    className="attribute-value list-item col col-4"
-                    placeholder={aitem.defaultValue}
-                    onChange={(evt) =>
-                        this.setAttributeValue(aitem.id, evt.target.value)
-                    }
-                />
-            )}
-        </Field>
+
         <div className="col col-4">
             <div
                 className="list-item flex-end btn btn-error btn-wide"
