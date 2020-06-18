@@ -1,10 +1,12 @@
 .text {
-	&-sub { font-size: 12px; font-style: italic; color: #6c6c6c; }
+	&-sub { font-size: 0.75rem; font-style: italic; color: #6c6c6c; }
+	&-super { font-size: 1.25rem; }
 	&-dark { color: $bgTertiary; }
 	&-center { text-align: center; }
 	&-reverse { background: $bgPrimaryComp; color: #000; }
 	&-title { padding: 10px 15px; display: inline-block; font-size: 18px; background: $bgSecondary; }
 	&-shortened { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	&-whitespace-nowrap { white-space: nowrap; }
 }
 
 .msg {

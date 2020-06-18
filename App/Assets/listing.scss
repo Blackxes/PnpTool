@@ -1,18 +1,39 @@
+// Todo: remake flex, list, etc rules and make them more clear
+// implement different list types
+// all types inherit from the flex main rules but have different behaviour on their own
+// children of flex container should have children with a list-item class
+// - flex - acts as a simple flex box without special behaviour
+// - list - adds spacing between list-item's
+// - item-list - same as list - adds border between list-item's
+// - compact-list - same as list - reduced spacing between list-item's
+
+// special types
+// - menu - 
+
 // simple flex without spacing
-.flex { display: flex; flex-direction: row;
+.flex, .list { display: flex; flex-direction: row;
 	&-inline { display: inline-flex; width: initial; }
 	& > * { margin-right: 10px;
 		&:last-child { margin-right: 0; }
 	}
 	&-v { flex-direction: column;
-		& > * { margin-bottom: 10px; margin-right: 0; }
+		& > * { margin-bottom: 0.5rem; margin-right: 0;
+			&:last-child { margin-bottom: 0; }
+		}
 	}
 	&-h { flex-direction: row;
 		& > * { margin-bottom: 0; }
 	}
+	&-start { align-self: flex-start; }
 	&-align { align-items: center; }
 	&-justify { justify-content: center; }
 	&-end { margin-left: auto; }
+	&-inset {
+		& > .list-item { padding-left: 5px; padding-right: 5px; }
+	}
+	&-item-box {
+		& > .list-item { padding: 10px; background: #fff; border: 1px solid #b2bec3; }
+	}
 	&-spaced {
 		& > * { margin-right: 30px; }
 		&.flex-v {
@@ -22,6 +43,7 @@
 	&-fill {
 		& > { flex: 1; }
 	}
+	&-wrap { flex-wrap: wrap; }
 }
 
 // same as flex but grid
@@ -44,7 +66,7 @@
 // elements one level beneath the .list element
 .list { margin: 0; padding: 0; display: flex; flex-direction: row;
 	.list-item { margin-right: 10px; padding: 10px 15px; box-sizing: border-box; border-bottom: 1px solid #111;
-		& > .list-item { padding: 0; border-bottom: none; }
+		& .list-item { padding: 0; border-bottom: none; }
 		&:hover { background: #eee; }
 		&:last-child { margin-right: 0; }
 	}

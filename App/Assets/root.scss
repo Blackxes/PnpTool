@@ -1,34 +1,7 @@
-// ---
-$okColor: #57bf6b;
-$errorColor: #bb4e4e;
-$warningColor: #ccb638;
-$infoColor: #99bef5;
-$submitColor: #e9b546;
-
-// parameter colors
-$_bestiary_parameter_minmax_color: #8c2cbd;
-$_bestiary_parameter_probability_color: #4772ff;
-$_bestiary_parameter_maxcount_color: #ff2b2b;
-
-// colors
-$bgPrimary: #fff;
-$bgPrimaryComp: #111;
-$bgSecondary: #eee;
-$bgSecondary2: #ccc;
-$bgTertiary: #111;
-
-$bgMenuColor: #6b3d15;
-$bgMenuColorActive: #e4986c;
-
-$bgOkColor: #57bf6b;
-$bgErrorColor: #bb4e4e;
-$bgWarningColor: #ccb638;
-$bgInfoColor: #99bef5;
-
 /* reset */
 html { height: 100%; }
 html, body { margin: 0; padding: 0; width: 100%; background: transparent; font: 16px "Roboto"; }
-body { min-height: 100%; color: $bgPrimaryComp; background: $bgPrimary; }
+body { position: relative; min-height: 100%; color: #2d3436; background: $bgPrimary; }
 
 ul, li { margin: 0; padding: 0; list-style-type: none; }
 ul > li { width: 100%; }
@@ -47,7 +20,7 @@ span, label, p { margin: 0 0 1rem 0; font-size: 1rem; font-weight: 400;
 li > p { margin-bottom: 0; }
 a { color: inherit; }
 
-[disabled] { user-select: none; pointer-events: none; filter: brightness(0.8); }
+[disabled] { user-select: none; pointer-events: none; filter: brightness(0.8); color: inherit; }
 
 i, .fa, .fas { padding: 0; }
 

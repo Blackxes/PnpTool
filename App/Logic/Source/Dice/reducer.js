@@ -5,7 +5,7 @@
  * @Email blackxes.dev@gmail.com
  */
 
-import { addToState, removeFromState } from '../Miscellaneous/functions';
+import { addToState, deleteFromState } from '../Miscellaneous/functions';
 
 const initialState = {
     rangeMin: 0,
@@ -29,7 +29,7 @@ const Dice = (state = initialState, { type, pl }) => {
         case 'add-roll-to-history':
             return addToState(state, 'rollHistory', pl);
         case 'remove-roll-from-history':
-            return removeFromState(state, 'rollHistory', pl);
+            return deleteFromState(state, 'rollHistory', pl);
         case 'archive-roll-history':
             return {
                 ...state,

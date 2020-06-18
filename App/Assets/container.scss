@@ -6,6 +6,7 @@
 }
 
 .container { margin-bottom: 30px;
+	&-center { margin-left: auto; margin-right: auto; }
 	&-vertical { padding: 0 20px; }
 	&-expander { padding: 7px 14px; box-sizing: border-box; }
 	&-spaceout { $space: 20px; margin: $space;
@@ -21,6 +22,7 @@
 		& .left-side { width: 50%; }
 		& .right-side { width: 50%; }
 	}
+	&:last-child { margin-bottom: 0; }
 }
 
 .close { padding: 8px 12px; background: $errorColor; cursor: pointer; color: $bgPrimary; }
