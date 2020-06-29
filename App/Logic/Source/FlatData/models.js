@@ -16,12 +16,23 @@ export class AttributeBase {
     }
 }
 
-// eslint-disable-next-line no-unused-vars
-export class CharacterSheetAttribute extends AttributeBase {
-    constructor(baseId, name, value = null, defaultValue = null) {
-        super(name, defaultValue);
+export class CharacterSheetAttribute {
+    constructor(baseId, value = null) {
         this.baseId = baseId;
         this.value = value;
+    }
+}
+
+/**
+ * character sheet attribute container / invalid on its own without id
+ * Todo: possibly redundant model
+ */
+export class ShallowCharacterSheetAttribute extends CharacterSheetAttribute {
+    constructor(baseId, value, source = null) {
+        super();
+        this.baseId = baseId;
+        this.value = value;
+        this.source = source;
     }
 }
 
@@ -50,7 +61,7 @@ export class CharacterSheet {
     }
 }
 
-export class Form {
+export class Equation {
     constructor(name, items = []) {
         this.id = generateId();
         this.name = name;
@@ -60,13 +71,20 @@ export class Form {
 
 /**
  * @param {string} type form item type
- * @param {FormItemValue} value contains information about the form item and its value
+ * @param {FormItemConfig} config contains information about the form item and its value
  */
-export class FormItem {
-    constructor(type, value) {
+export class EquationUnit {
+    constructor(type, config) {
         this.id = generateId();
         this.type = type;
-        this.value = value;
+        this.config = config;
+    }
+}
+
+export class ShallowFormItem extends EquationUnit {
+    constructor(type, config) {
+        this.type = type;
+        this.config = config;
     }
 }
 
@@ -74,9 +92,23 @@ export class FormItem {
  * @param {string} contextId the id of the instance of the type which is currently the context
  * 	eg. type: attribute - the contextId is the id of an attribute
  */
-export class FormItemValue {
+export class EquationUnitConfig {
     constructor(contextId) {
-        this.id = contextId;
+        this.contextId = contextId;
+    }
+}
+
+/**
+ * information container for the equation parsing
+ */
+export class LinkedEquationUnit {
+    constructor() {
+        this.config = {};
+        this.linked = null;
+        this.type = null;
+        this.valid = true;
+        this.errors = [];
+        this.isNew = false; // initially on unit is new except you specifically tell it to be new
     }
 }
 
@@ -84,7 +116,7 @@ export class FormItemValue {
  * @param {string} key formId and sheetId as "formId_sheetId"
  * @param {array} ignoredAttributes ids of AttributeBases
  */
-export class FormSheetOptions {
+export class EquationSheetOptions {
     constructor(formId, sheetId, ignoredAttributes = []) {
         this.id = generateId();
         this.key = formId + '_' + sheetId;

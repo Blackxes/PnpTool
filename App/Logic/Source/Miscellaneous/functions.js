@@ -57,12 +57,14 @@ export const infoResponse = (message, value = true, code = 0) => {
  *
  * @return string - the generated hash
  */
-const g_defaultHashChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+const g_defaultHashChars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
 export const generateHashString = (length = 8, chars = g_defaultHashChars) => {
     let hash = '';
 
-    while (length > hash.length) hash += chars.charAt(Math.floor(Math.random() * chars.length));
+    while (length > hash.length)
+        hash += chars.charAt(Math.floor(Math.random() * chars.length));
 
     return hash;
 };
@@ -138,6 +140,50 @@ export const keyifyString = (string, useDash = true) => {
 };
 
 /**
+ * calls every callback in the given array and passes a state object
+ * as the first argument followed by the given user defined
+ *
+ * to cancel the process @throw the state or set the _cancel property true
+ *
+ * @param {object} initialState well initial state for the callbacks to accept
+ * @param {array} processes array of objects containing the following properties
+ * 	callback: Function - the callback which will be called
+ * 		1. argument - result of previous process - undefined on first process
+ * 		2. argument - state object to have data shared around callbacks when they rely on them
+ * 		>2. argument - user defined arguments passed as applied array
+ * 	args: Array - array of arguments passed to the callback
+ *
+ * @return {object} the shared state object which is processed through the callbacks
+ */
+export const processCallbacks = (initialState, processes) => {
+    let state = {
+        ...initialState,
+        _cancel: false
+    };
+
+    for (const config of processes) {
+        let { callback, args, thisArg } = config;
+
+        // a bit more userfriendly when you only have a callback
+        // instead of having an object with only the callback property
+        if (typeof config == 'function') callback = config;
+
+        try {
+            state = {
+                ...state,
+                ...callback.apply(thisArg, [state, ...(args || [])])
+            };
+
+            if (state._continue) throw state;
+        } catch (state) {
+            return state;
+        }
+    }
+
+    return state;
+};
+
+/**
  * returns intersection of array of objects
  * Todo: implement
  */
@@ -188,4 +234,17 @@ export const updateInState = (state, key, id, replacement) => ({
 /**
  * returns the requested entry from the state when found else undefined
  */
-export const findInState = (state, key, id) => state[key].find((item) => item.id == id);
+export const findInState = (state, key, id) =>
+    state[key].find((item) => item.id == id);
+
+/**
+ * return an object within an array by key and value
+ */
+export const findInArray = (scope, value, key = 'id') =>
+    scope.find((Item) => Item[key] == value);
+
+/**
+ * returns a boolean whether an object is in an array
+ */
+export const someInArray = (scope, value, key = 'id') =>
+    scope.some((Item) => Item[key] == value);

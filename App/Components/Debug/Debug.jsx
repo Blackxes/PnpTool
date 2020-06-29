@@ -12,7 +12,10 @@ import { Button } from '../Form/Buttons';
 import { connect } from 'react-redux';
 
 const Debug = ({ panelOpen, togglePanelOpen }) => {
-    const classNames = joinStrings(['debugging', [panelOpen, 'open', 'closed']]);
+    const classNames = joinStrings([
+        'debugging',
+        [panelOpen, 'open', 'closed']
+    ]);
 
     return (
         <div className={classNames}>
@@ -27,7 +30,9 @@ const Debug = ({ panelOpen, togglePanelOpen }) => {
             {panelOpen && (
                 <React.Fragment>
                     <div className="debug-component flex flex-v">
-                        <p className="debug-component-title text-center">Storage Management</p>
+                        <p className="debug-component-title text-center">
+                            Storage Management
+                        </p>
                         <DebugStorageManagement />
                     </div>
                 </React.Fragment>
@@ -37,7 +42,7 @@ const Debug = ({ panelOpen, togglePanelOpen }) => {
 };
 
 const toProps = (state) => ({
-    panelOpen: state.Debug.panelOpen
+    panelOpen: state.Debug?.panelOpen
 });
 
 const toDispatch = (dispatch) => ({

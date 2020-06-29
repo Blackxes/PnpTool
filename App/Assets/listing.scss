@@ -13,17 +13,28 @@
 // simple flex without spacing
 .flex, .list { display: flex; flex-direction: row;
 	&-inline { display: inline-flex; width: initial; }
-	& > * { margin-right: 10px;
-		&:last-child { margin-right: 0; }
-	}
-	&-v { flex-direction: column;
-		& > * { margin-bottom: 0.5rem; margin-right: 0;
+	// & > * { margin-right: 10px;
+	// 	&:last-child { margin-right: 0; }
+	// }
+	&-v { flex-direction: column; width: initial;
+		& > .list-item { width: 100%; margin-bottom: 0.5rem; margin-right: 0;
 			&:last-child { margin-bottom: 0; }
 		}
 	}
-	&-h { flex-direction: row;
-		& > * { margin-bottom: 0; }
+	&-h { flex-direction: row; width: 100%;
+		& > .list-item { margin-bottom: 0; margin-right: 0.5rem; width: fit-content;
+			&.item-max { width: inherit; }
+			&:last-child { margin-right: 0; }
+		}
 	}
+	.list-item {
+		&.mtb { margin-top: 20px; margin-bottom: 20px; }
+		&.mb { margin-bottom: 20px; }
+		&.mn  { margin-top: 0; margin-bottom: 0; }
+		&.fit { width: fit-content; }
+		&.end { justify-content: flex-end; }
+	}
+
 	&-start { align-self: flex-start; }
 	&-align { align-items: center; }
 	&-justify { justify-content: center; }
@@ -40,10 +51,15 @@
 			& > { margin-bottom: 30px; }
 		}
 	}
+	&-nospace {
+		&.flex-v > .list-item { margin-bottom: 0; }
+		&.flex-h > .list-item { margin-right: 0; }
+	}
 	&-fill {
-		& > { flex: 1; }
+		& > .list-item { flex: 1 1 0; }
 	}
 	&-wrap { flex-wrap: wrap; }
+	&-space-between { justify-content: space-between; }
 }
 
 // same as flex but grid
@@ -65,13 +81,13 @@
 // the .list-spacing class which adds spacing to the .list-item
 // elements one level beneath the .list element
 .list { margin: 0; padding: 0; display: flex; flex-direction: row;
-	.list-item { margin-right: 10px; padding: 10px 15px; box-sizing: border-box; border-bottom: 1px solid #111;
+	.list-item { margin-right: 10px; padding: 10px 15px; box-sizing: border-box; background: #fff; border-bottom: 1px solid #2d3436;
 		& .list-item { padding: 0; border-bottom: none; }
-		&:hover { background: #eee; }
+		&:hover { background: #b2bec3; color: #fff; }
 		&:last-child { margin-right: 0; }
 	}
 	&-v { flex-direction: column;
-		.list-item { margin-right: 0; width: 100%;
+		.list-item { margin-right: 0; margin-bottom: 0; width: 100%;
 			&:last-child { margin-bottom: 0; }
 		}
 	}

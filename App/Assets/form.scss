@@ -1,9 +1,24 @@
 input, select, textarea, button { margin: 0; padding: 8px 14px; width: 100%; border: none;  box-sizing: border-box; background: #fff; font-family: inherit; font-size: 16px;
 	&:active, &:focus { outline: none; }
 }
-select { padding: 6px 14px; }
+select {
+	$transAmount: 0.85;
 
-input, select, .btn, button, input[type="submit"] { border-right: 2px solid #2d3436; border-bottom: 1px dashed #2d3436; }
+	padding: 6px 19px 6px 14px;
+	position: relative;
+	background: transparentize($regularColor, $transAmount);
+	border: 1px solid $regularColor;
+	border-radius: 2px;
+	box-sizing: border-box;
+	
+	&.ok { border-color: $okColor; color: $okColor; background: transparentize($okColor, $transAmount); }
+	&.error { border-color: $errorColor; color: $errorColor; background: transparentize($errorColor, $transAmount); }
+	&.warning { border-color: $warningColor; color: $warningColor; background: transparentize($warningColor, $transAmount); }
+	&.info { border-color: $infoColor; color: $infoColor; background: transparentize($infoColor, $transAmount); }
+	&.submit { border-color: $submitColor; color: $submitColor; background: transparentize($submitColor, $transAmount); }
+}
+
+// input, select, .btn, button, input[type="submit"] {  }
 
 [type="submit"] { max-width: (100% / 3); align-self: flex-end; }
 
@@ -14,16 +29,16 @@ input, select, .btn, button, input[type="submit"] { border-right: 2px solid #2d3
 	&:hover { cursor: pointer; }
 }
 
-.btn, button { background: #fff; border: 2px dashed #2d3436; text-decoration: none; transition: all 0.05s linear;
+.btn, button { background: #fff; border: 2px dashed #2d3436; text-decoration: none; transition: all 0.05s linear; box-sizing: border-box;
 	width: fit-content; color: #2d3436;
 
 	$transAmount: 0.85;
-	&-ok { border-color: $okColor; background: transparentize($okColor, $transAmount); }
-	&-error { border-color: $errorColor; background: transparentize($errorColor, $transAmount); }
-	&-warning { border-color: $warningColor; background: transparentize($warningColor, $transAmount); }
-	&-info { border-color: $infoColor; background: transparentize($infoColor, $transAmount); }
-	&-submit { border-color: $submitColor; background: transparentize($submitColor, $transAmount); }
-	&-small { padding: 4px 10px; width: fit-content;
+	&-ok { border-color: $okColor; color: $okColor; background: transparentize($okColor, $transAmount); }
+	&-error { border-color: $errorColor; color: $errorColor; background: transparentize($errorColor, $transAmount); }
+	&-warning { border-color: $warningColor; color: $warningColor; background: transparentize($warningColor, $transAmount); }
+	&-info { border-color: $infoColor; color: $infoColor; background: transparentize($infoColor, $transAmount); }
+	&-submit { border-color: $submitColor; color: $submitColor; background: transparentize($submitColor, $transAmount); }
+	&-small { padding: 4px 10px; width: fit-content; box-sizing: border-box;
 		&, & * { font-size: 12px; }
 	}
 	&-wide {
@@ -34,6 +49,7 @@ input, select, .btn, button, input[type="submit"] { border-right: 2px solid #2d3
 	&-initial { max-width: initial; width: initial; }
 	&-reset { width: initial; }
 	&-fit { width: fit-content; }
+	&-fw { width: inherit; }
 	&:hover { filter: brightness(1.1); }
 }
 
@@ -66,9 +82,9 @@ input, select, .btn, button, input[type="submit"] { border-right: 2px solid #2d3
 		&:last-child { margin-bottom: 0; }
 		> *:first-child:last-child { max-width: 100%; width: 100%; }
 	}
-	.form-title { padding: 10px; background: #b2bec3; border-top: 1px dashed #2d3436; color: #2d3436; }
+	.form-title { padding: 10px; background: #b2bec3; box-sizing: border-box; border-top: 1px dashed #2d3436; color: #2d3436; }
 	.form-field-header { padding: 9px 0; border-left: 2px solid #333; border-bottom: 1px dashed #333; background: #fff; box-sizing: border-box;
-		& > * { margin-bottom: 5px; padding: 0 10px;
+		& > * { margin-bottom: 5px; padding: 0 10px; box-sizing: border-box;
 			&:last-child { margin-bottom: 0; }
 		} 
 	}

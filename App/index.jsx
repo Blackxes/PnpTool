@@ -12,11 +12,20 @@ import store from './Logic/store';
 import { Provider } from 'react-redux';
 import Root from './Components/Root';
 
-import styles from './Assets/app.scss';
+import './Assets/app.scss';
+import { generateId } from './Logic/Source/Miscellaneous/functions';
 
 if (process.env.NODE_ENV === 'development') {
     import('./Assets/debug.scss');
 }
+
+console.group('Random Hash Ids');
+console.log(generateId());
+console.log(generateId());
+console.log(generateId());
+console.log(generateId());
+console.log(generateId());
+console.groupEnd();
 
 ReactDom.render(
     <Provider store={store}>

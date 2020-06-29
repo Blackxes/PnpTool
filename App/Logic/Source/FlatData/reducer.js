@@ -5,13 +5,16 @@
  * @Email blackxes.dev@gmail.com
  */
 
-import { addToState, deleteFromState, updateInState } from '../Miscellaneous/functions';
+import {
+    addToState,
+    deleteFromState,
+    updateInState
+} from '../Miscellaneous/functions';
 import {
     createAttributeBaseFromSubmission,
-    createShallowAttributeBaseFromSubmission,
-    getAttributeIdFromSubmission,
-    createAttributeSetFromSubmission
+    getAttributeIdFromSubmission
 } from './functions';
+import { EquationSymbols } from './data';
 
 const initialState = {
     attributeBases: [
@@ -27,7 +30,7 @@ const initialState = {
     ],
     attributeSets: [],
     characterSheets: [],
-    equationSymbols: [],
+    equationSymbols: EquationSymbols,
     forms: [],
     formSheetOptions: []
 };
@@ -35,16 +38,29 @@ const initialState = {
 const FlatData = (state = initialState, { type, pl }) => {
     switch (type) {
         case 'add-attribute-base':
-            return addToState(state, 'attributeBases', createAttributeBaseFromSubmission(pl));
+            return addToState(
+                state,
+                'attributeBases',
+                createAttributeBaseFromSubmission(pl)
+            );
         case 'delete-attribute-base':
             console.log(pl, getAttributeIdFromSubmission(pl));
-            return deleteFromState(state, 'attributeBases', getAttributeIdFromSubmission(pl));
+            return deleteFromState(
+                state,
+                'attributeBases',
+                getAttributeIdFromSubmission(pl)
+            );
         case 'update-attribute-base':
-            const replacement = createShallowAttributeBaseFromSubmission(pl);
-            const attributeId = getAttributeIdFromSubmission(pl);
-            return updateInState(state, 'attributeBases', attributeId, replacement);
+        // const replacement = createShallowAttributeBaseFromSubmission(pl);
+        // const attributeId = getAttributeIdFromSubmission(pl);
+        // return updateInState(
+        //     state,
+        //     'attributeBases',
+        //     attributeId,
+        //     replacement
+        // );
         case 'add-attribute-set':
-            return addToState(state, 'attributeSets', createAttributeSetFromSubmission(pl));
+        // return addToState(state, 'attributeSets', createAttributeSetFromSubmission(pl));
         // return addToState(state, 'attributeSets', pl);
         case 'delete-attribute-set':
             return deleteFromState(state, 'attributeSets', pl);

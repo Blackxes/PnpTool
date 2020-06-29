@@ -27,19 +27,27 @@ const initialProps = {
 const AttributeBaseForm = (props) => {
     const { onSubmit, submitLabel } = { ...initialProps, ...props };
 
+    const wusa = 20;
+    const bla = 20;
+
     return (
         <FormWrapper
             onSubmit={onSubmit}
             render={() => (
-                <React.Fragment>
+                <>
                     <FormTitle title="Attributbasis" />
                     <FormFieldContainer horizontal>
                         <FormFieldHeader>
                             <FormFieldTitle title="Name" />
                         </FormFieldHeader>
                         <FormFieldWrapper>
-                            <Field name="name" component="input">
-                                {({ input }) => <input {...input} placeholder="Name" />}
+                            <Field name="name" component="input" wusa="wahnsin">
+                                {/* {({ iput }) => (
+									<input
+							 			{...i nput}
+										placeholder="Name"
+									/>
+								)} */}
                             </Field>
                         </FormFieldWrapper>
                     </FormFieldContainer>
@@ -48,19 +56,23 @@ const AttributeBaseForm = (props) => {
                             <FormFieldTitle title="Standardwert" />
                             <FormFieldDescription>
                                 <p>
-                                    Dieser Wert wird verwendet wenn dem Character Sheet Attribut
-                                    kein Wert gegeben wurde.
+                                    Dieser Wert wird verwendet wenn dem
+                                    Character Sheet Attribut kein Wert gegeben
+                                    wurde.
                                 </p>
                             </FormFieldDescription>
                         </FormFieldHeader>
                         <FormFieldWrapper>
                             <Field name="defaultValue" component="input">
-                                {({ input }) => <input {...input} placeholder="Standardwert" />}
+                                {/* {{ input }) => (<input
+									{...input}
+									placeholder="Standardwert"
+								/>)} */}
                             </Field>
                         </FormFieldWrapper>
                     </FormFieldContainer>
                     <SubmitButton>{submitLabel}</SubmitButton>
-                </React.Fragment>
+                </>
             )}
         />
     );

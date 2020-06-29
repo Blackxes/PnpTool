@@ -6,7 +6,7 @@ body { position: relative; min-height: 100%; color: #2d3436; background: $bgPrim
 ul, li { margin: 0; padding: 0; list-style-type: none; }
 ul > li { width: 100%; }
 
-h1 { font-size: 2.18rem; }
+h1 { font-size: 1.9rem; }
 h2 { font-size: 1.9rem; }
 h3 { font-size: 1.64rem; }
 h4 { font-size: 1.43rem; }
@@ -16,6 +16,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; margin-bottom: 0.6em; color: inherit; font-w
 h1 { width: 100%; text-align: center; }
 span, label, p { margin: 0 0 1rem 0; font-size: 1rem; font-weight: 400;
 	&:last-child { margin-bottom: 0; }
+}
+span { font-size: inherit;
+	margin-left: 0.3rem; margin-right: 0.3rem;
 }
 li > p { margin-bottom: 0; }
 a { color: inherit; }

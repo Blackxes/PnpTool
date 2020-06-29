@@ -5,7 +5,18 @@
 	&-4 { max-width: 33.33% } &-3 { max-width: 25%; } &-2 { max-width: 16.67%; } &-1 { max-width: 8.33%; }
 }
 
-.container { margin-bottom: 30px;
+.container { margin-bottom: 20px;
+	&-box { margin-bottom: 20px; padding: 10px 15px; background: #2d3436; box-sizing: border-box; color: #dfe6e9; background: #2d3436;
+		$transAmount: 0.65;
+		
+		&.regular &.ok, &.error, &.warning, &.info { border: 1px solid #2d3436; border-left-width: 5px; background: #fff; color: #2d3436; }
+		&.ok { background: transparentize($okColor, $transAmount); border-color: $okColor; }
+		&.error { background: transparentize($errorColor, $transAmount); border-color: $errorColor; }
+		&.warning { background: transparentize($warningColor, $transAmount); border-color: $warningColor; }
+		&.info { background: transparentize($infoColor, $transAmount); border-color: $infoColor; }
+		& + & { margin-bottom: 5px; }
+		&:last-child { margin-bottom: 0; }
+	}
 	&-center { margin-left: auto; margin-right: auto; }
 	&-vertical { padding: 0 20px; }
 	&-expander { padding: 7px 14px; box-sizing: border-box; }
@@ -22,6 +33,7 @@
 		& .left-side { width: 50%; }
 		& .right-side { width: 50%; }
 	}
+
 	&:last-child { margin-bottom: 0; }
 }
 

@@ -32,7 +32,9 @@ export const setupInitialState = (rootReducer) => {
 
     if (Environment == 'development') {
         // regardless of the permission debug permission have to be loaded
-        const settings = JSON.parse(localStorage.getItem(storageKeyify('debug')));
+        const settings = JSON.parse(
+            localStorage.getItem(storageKeyify('debug'))
+        );
         initialState.Debug = {
             ...initialState.Debug,
             ...settings,
@@ -41,7 +43,10 @@ export const setupInitialState = (rootReducer) => {
 
         // define new debug options when none given
         if (!settings) {
-            localStorage.setItem(storageKeyify('debug'), JSON.stringify(initialState.Debug));
+            localStorage.setItem(
+                storageKeyify('debug'),
+                JSON.stringify(initialState.Debug)
+            );
         }
         //
         else {
@@ -55,7 +60,9 @@ export const setupInitialState = (rootReducer) => {
                 const reducerKeys = Object.keys(initialState);
 
                 for (const key of reducerKeys) {
-                    const data = JSON.parse(localStorage.getItem(storageKeyify(key)));
+                    const data = JSON.parse(
+                        localStorage.getItem(storageKeyify(key))
+                    );
 
                     initialState[key] = {
                         ...initialState[key],
@@ -91,7 +98,10 @@ export const setupInitialStoreListeners = (store) => {
     if (Environment == 'development') {
         store.subscribe(() => {
             const currentState = store.getState();
-            localStorage.setItem(storageKeyify('debug'), JSON.stringify(currentState.Debug));
+            localStorage.setItem(
+                storageKeyify('debug'),
+                JSON.stringify(currentState.Debug)
+            );
         });
     }
 
@@ -101,7 +111,7 @@ export const setupInitialStoreListeners = (store) => {
         const debugSettings = store.getState().Debug;
 
         // prettier-ignore
-        if ((debugSettings.saveToStoragePermission && debugSettings.loadFromStoragePermission) || Environment == 'production') {
+        if (Environment == 'production' || (debugSettings.saveToStoragePermission && debugSettings.loadFromStoragePermission)) {
             const state = store.getState();
             const reducerKeys = Object.keys(state);
 

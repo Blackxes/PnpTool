@@ -1,7 +1,9 @@
-$okColor: #009c7e;
-$errorColor: #d63031;
-$warningColor: #ffa600;
-$infoColor: #74b9ff;
+// initial colors / mostly background colors
+$regularColor: #2d3436;
+$okColor: #099e31;
+$errorColor: #d84b4c;
+$warningColor: #eab800;
+$infoColor: #558fc9;
 $submitColor: #ffa600;
 
 // parameter colors
@@ -23,3 +25,7 @@ $bgOkColor: #57bf6b;
 $bgErrorColor: #bb4e4e;
 $bgWarningColor: #ccb638;
 $bgInfoColor: #99bef5;
+
+// Note: considered usable
+$foreGround: palevioletred;
+$background: papayawhip;

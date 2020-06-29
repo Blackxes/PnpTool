@@ -14,12 +14,13 @@ import { joinStrings } from '../../Logic/Source/Miscellaneous/functions';
  * main button component
  * uses other button components in this file to build the button
  */
-export const Button = ({ small, className, children, ...rest }) => {
+export const Button = ({ fullWidth, small, className, children, ...rest }) => {
     // default button
     const classNames = joinStrings([
         'btn',
         [rest.type, 'btn-' + rest.type],
         [small, 'btn-small'],
+        [fullWidth, 'btn-fw'],
         className
     ]);
 
@@ -67,7 +68,7 @@ export const InfoButton = ({ small, className, children, ...rest }) => {
  * uses the <Button /> Component in this file
  */
 export const SubmitButton = ({ small, type, ...rest }) => {
-    return Button({ type: 'submit', ...rest });
+    return Button({ type: 'submit', small, ...rest });
 };
 
 /**

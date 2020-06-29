@@ -13,17 +13,27 @@ import {
     FormFieldContainer,
     FormFieldHeader,
     FormFieldTitle,
-    FormFieldDescription,
     FormFieldWrapper
 } from '../Form/FormComponents';
 import { SubmitButton, Button } from '../Form/Buttons';
 import {
-    createCharacterSheetAttribute,
-    getLinkedAttributes,
-    getLinkedSet,
-    getLinkedAttribute
+    getLinkedAttribute,
+    CreateShallowCharacterSheetAttribute
 } from '../../Logic/Source/FlatData/functions';
+import {
+    findInArray,
+    joinStrings,
+    someInArray
+} from '../../Logic/Source/Miscellaneous/functions';
+import {
+    faPlus as FasPlus,
+    faMinus as FasMinus
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+/**
+ * initial props
+ */
 const defaultProps = {
     onSubmit: () => {},
     submitLabel: 'Hinzufügen',
@@ -31,80 +41,68 @@ const defaultProps = {
     attributeBases: []
 };
 
-// const PreviewSetSelection = ({ defaultSet, onSelection, attributeSets }) => {
-//     return (
-//         <div className="flex flex-h flex-align">
-//             <Field
-//                 name="pendingSet"
-//                 component="select"
-//                 defaultValue={defaultSet}
-//             >
-//                 {({ input }) => (
-//                     <select {...input} onChange={onSelection}>
-//                         <option value="">- Auswählen -</option>
-//                         {attributeSets.map((item) => (
-//                             <option key={item.id} value={item.id}>
-//                                 {item.name}
-//                             </option>
-//                         ))}
-//                     </select>
-//                 )}
-//             </Field>
-//         </div>
-//     );
-// };
-
-// const PreviewSetAttributesListing = ({ attributes }) => {
-//     if (!attributes.length) {
-//         return null;
-//     }
-
-//     return (
-//         <div className="flex flex-h">
-//             <p className="list-item col col-6">Attribute in diesem Set</p>
-//             <div className="preview-set-attributes list-item col col-6 flex flex-v flex-wrap">
-//                 {attributes.map((attr) => (
-//                     <p key={attr.id} className="list-item msg-info text-center">
-//                         {attr.name}/{attr.defaultValue}
-//                     </p>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-const CharacterSheetAttributeValue = ({ Attribute, OnChange }) => {
-    const { id, defaultValue } = Attribute;
-    const FieldName = 'attribute' + id;
+/**
+ * header of the attribute list item
+ * regardless of its state (added/preview)
+ */
+const AttributeListItemHeader = ({ Attribute }) => {
+    const { name, description } = Attribute;
 
     return (
-        <Field name={FieldName} component="input" defaultValue={defaultValue}>
-            {({ input }) => (
-                <input
-                    {...input}
-                    className="attribute-value list-item col col-4"
-                    placeholder={defaultValue}
-                    onChange={(evt) => OnChange(evt, Attribute)}
-                />
-            )}
-        </Field>
+        <div className="list-item col col-4 flex flex-v">
+            <p className="attribute-title">{name}</p>
+            <p className="attribute-description text-sub">
+                {description || 'Keine Beschreibung'}
+            </p>
+        </div>
     );
 };
 
-const PreviewAttributeListItemValue = ({ AttributeBase, OnAdd }) => {};
+/**
+ * builds the name for an attribute field
+ */
+const BuildAttributeFormFieldName = (id, key) => {
+    return 'attribute_' + id + '_' + key;
+};
 
-const AttributeListItemHeader = ({ Attribute }) => {
-    const { id, name, description } = Attribute;
+/**
+ * attribute list item value component for when the attribute has been added to the sheet
+ */
+const CharacterSheetAttributeValue = ({ Attribute, OnChange }) => {
+    const { baseId, value, defaultValue } = Attribute;
 
     return (
-        <div key={id} className="list-item flex flex-h flex-align">
-            <div className="list-item col col-4 flex flex-v">
-                <p className="attribute-title">{name}</p>
-                <p className="attribute-description text-sub">
-                    {description || 'Keine Beschreibung'}
-                </p>
-            </div>
-        </div>
+        <React.Fragment>
+            <Field
+                name={BuildAttributeFormFieldName(baseId, 'value')}
+                component="input"
+                defaultValue={value}
+            >
+                {({ input }) => (
+                    <input
+                        {...input}
+                        className="attribute-value list-item"
+                        placeholder={defaultValue}
+                        onChange={(evt) =>
+                            OnChange(Attribute.baseId, evt.target.value)
+                        }
+                    />
+                )}
+            </Field>
+        </React.Fragment>
+    );
+};
+
+/**
+ * preview value component of an attribute which has not been added so far
+ */
+const PreviewAttributeListItemValue = ({ AttributeBase }) => {
+    const { defaultValue } = AttributeBase;
+
+    return (
+        <p className="attribute-default-value list-item col col-4 text-center text-super msg-error">
+            {defaultValue}
+        </p>
     );
 };
 
@@ -113,88 +111,57 @@ const AttributeListItemHeader = ({ Attribute }) => {
  * or an added attribute to the charactersheet therefore an charactersheet attribute
  */
 const CharacterSheetAttributeListItem = ({
-    Attribute,
-    IsPreview,
+    Base,
+    SheetAttribute,
     OnAdd,
     OnRemove,
-    OnChange,
-    ActionLabel
+    OnChange
 }) => {
-    return (
-        <React.Fragment>
-            <AttributeListItemHeader Attribute={Attribute} />
-            {IsPreview ? (
-                <CharacterSheetAttributeValue />
-            ) : (
-                <AttributePreviewField />
-            )}
+    const ButtonClassNames = joinStrings([
+        'flex-end btn',
+        [!SheetAttribute, 'btn-ok', 'btn-error']
+    ]);
 
-            {/* <div className="">
-            {IsPreview ? (
-                <PreviewAttributeListItemValue
-                    Attribute={Attribute}
-                    OnAdd={OnAdd}
-                />
+    return (
+        <div className="attribute-item list-item flex flex-h flex-align flex-fill">
+            <AttributeListItemHeader Attribute={Base} />
+            {!SheetAttribute ? (
+                <PreviewAttributeListItemValue AttributeBase={Base} />
             ) : (
-                <AttributeAddedListItemValue
-                    Attribute={Attribute}
+                <CharacterSheetAttributeValue
+                    Attribute={SheetAttribute}
+                    OnChange={OnChange}
                 />
             )}
-			</div>
-            <div className="col col-4">
+            <div className="list-item col col-4">
                 <div
-                    className="list-item flex-end btn btn-error btn-wide"
-                    onClick={IsPreview ? OnAdd(Attribute.id) : OnRemove}
+                    className={ButtonClassNames}
+                    onClick={
+                        !SheetAttribute
+                            ? () => {
+                                  OnAdd(Base.id);
+                              }
+                            : () => OnRemove(SheetAttribute.baseId)
+                    }
                 >
-                    <p>{ActionLabel}</p>
+                    {!SheetAttribute ? (
+                        <FontAwesomeIcon className="msg-ok" icon={FasPlus} />
+                    ) : (
+                        <FontAwesomeIcon
+                            className="msg-error"
+                            icon={FasMinus}
+                        />
+                    )}
                 </div>
-            </div> */}
-        </React.Fragment>
+            </div>
+        </div>
     );
 };
 
-const ListItemAddedAttribute = ({ Attribute, OnRemove, OnChange }) => {
-    <div key={aitem.id} className="list-item flex flex-h flex-align">
-        <div className="list-item col col-4 flex flex-v">
-            <p className="attribute-title">{aitem.name}</p>
-            <p className="attribute-description text-sub">
-                {aitem.description || 'Keine Beschreibung'}{' '}
-            </p>
-        </div>
-
-        <div className="col col-4">
-            <div
-                className="list-item flex-end btn btn-error btn-wide"
-                onClick={() => this.removeAttribute(aitem.id)}
-            >
-                <p>Remove</p>
-            </div>
-        </div>
-    </div>;
-};
-
-const ListItemPreviewAttribute = ({ BaseAttribute, OnAdd }) => {
-    <div key={aitem.id} className="list-item flex flex-h flex-align">
-        <div className="list-item col col-4 flex flex-v">
-            <p className="attribute-title">{aitem.name}</p>
-            <p className="attribute-description text-sub">
-                {aitem.description || 'Keine Beschreibung'}{' '}
-            </p>
-        </div>
-        <p className="attribute-default-value list-item col col-4 text-center text-super msg-error">
-            {aitem.defaultValue}
-        </p>
-        <div className="col col-4">
-            <div
-                className="list-item flex-end btn btn-ok btn-wide"
-                onClick={() => this.addAttribute(aitem.id)}
-            >
-                <p>Add</p>
-            </div>
-        </div>
-    </div>;
-};
-
+/**
+ * character sheet form component
+ * serves as an creation and update component for character sheets
+ */
 const CharacterSheetForm = class extends React.Component {
     constructor(props) {
         super(props);
@@ -204,25 +171,21 @@ const CharacterSheetForm = class extends React.Component {
         };
     }
 
-    addAttribute = (BaseId) => {
-        if (
-            !BaseId ||
-            this.state.Attributes.find((AItem) => AItem.baseId == BaseId)
-        ) {
-            return true;
-        }
+    /**
+     * adds an attribute base to this sheets attribute
+     */
+    AddAttribute = (baseId) => {
+        const Attribute = someInArray(this.state.Attributes, baseId, 'baseId');
 
-        const Base = getLinkedAttribute(BaseId, this.props.attributeBases);
+        if (!baseId || Attribute) return true;
 
-        if (!Base) {
-            return true;
-        }
+        const base = getLinkedAttribute(baseId, this.props.attributeBases);
 
-        const SheetAttribute = createCharacterSheetAttribute(
-            BaseId,
-            Base.name,
-            '',
-            Base.defaultValue
+        if (!base) return true;
+
+        const SheetAttribute = CreateShallowCharacterSheetAttribute(
+            base.id,
+            base.defaultValue
         );
 
         this.setState({
@@ -233,13 +196,41 @@ const CharacterSheetForm = class extends React.Component {
     };
 
     /**
+     * adds every attribute base to this sheet
+     */
+    AddAllAttributes = () => {
+        // filter bases which are already included
+        // and no.. its not a, b, c item.. its b-aseitem and a-ttributeitem
+        const free = this.props.attributeBases.filter(
+            (bitem) =>
+                !this.state.Attributes.some((aitem) => aitem.baseId == bitem.id)
+        );
+
+        console.log(free);
+
+        // build shallow instances
+        const shallows = free.map((fitem) =>
+            CreateShallowCharacterSheetAttribute(fitem.id, fitem.defaultValue)
+        );
+
+        console.log(shallows);
+
+        // insert into state
+        this.setState({
+            Attributes: [...this.state.Attributes, ...shallows]
+        });
+
+        return true;
+    };
+
+    /**
      * removes an attribute from this character sheet
      */
-    removeAttribute = (BaseId) => {
+    RemoveAttribute = (ABaseId) => {
         this.setState({
             Attributes: [
                 ...this.state.Attributes.filter(
-                    (AItem) => AItem.baseId != BaseId
+                    (AItem) => AItem.baseId != ABaseId
                 )
             ]
         });
@@ -250,14 +241,53 @@ const CharacterSheetForm = class extends React.Component {
     /**
      * updates the value of an attribute in this sheet
      */
-    setAttributeValue = (BaseId, value) => {
+    SetAttributeValue = (baseId, value) => {
         this.setState({
             Attributes: [
-                ...this.state.Attributes.map((AItem) =>
-                    AItem.baseId != BaseId ? AItem : { ...AItem, value }
+                ...this.state.Attributes.map((aitem) =>
+                    aitem.baseId != baseId ? aitem : { ...aitem, value }
                 )
             ]
         });
+    };
+
+    /**
+     * returns an attribute by the baseId
+     */
+    GetAttribute = (baseId) => {
+        return this.state.Attributes.find((aitem) => aitem.baseId == baseId);
+    };
+
+    /**
+     * returns the attribute base
+     */
+    GetAttributeBase = (BaseId) => {
+        return findInArray(this.props.attributeBases, BaseId);
+    };
+
+    /**
+     * returns a concatenated string of added attributes ids
+     */
+    GetAttributesBaseIdsString = () => {
+        return this.state.Attributes.map((aitem) => aitem.baseId).join(',');
+    };
+
+    /**
+     * checks whether given id refers to an attribute added to this sheet
+     */
+    IsAdded = (BaseId) => {
+        return this.state.Attributes.some((AItem) => AItem?.baseId == BaseId);
+    };
+
+    /**
+     * resets the attributes state
+     */
+    ResetAttributes = () => {
+        this.setState({
+            Attributes: []
+        });
+
+        return true;
     };
 
     /**
@@ -270,7 +300,10 @@ const CharacterSheetForm = class extends React.Component {
             <React.Fragment>
                 <FormWrapper
                     formKey="character-sheet"
-                    onSubmit={(values) => console.log(values)}
+                    onSubmit={(values) => {
+                        onSubmit(values);
+                        this.ResetAttributes();
+                    }}
                     render={() => (
                         <React.Fragment>
                             <FormTitle title="Charactersheet Einträge" />
@@ -284,54 +317,52 @@ const CharacterSheetForm = class extends React.Component {
                                             <input
                                                 {...input}
                                                 placeholder="Name"
+                                                required
                                             />
                                         )}
                                     </Field>
                                 </FormFieldWrapper>
                             </FormFieldContainer>
-                            <FormFieldContainer>
-                                <FormFieldHeader className="list-item">
-                                    <FormFieldTitle title="Attribute" />
-                                </FormFieldHeader>
-                                <FormFieldWrapper className="list-item flex flex-v flex-item-box">
-                                    {this.props.attributeBases.map(
-                                        (aitem) => {}
-                                    )}
-                                </FormFieldWrapper>
-                                {/* this.state.Attributes.find(
-                                            (item) => item.baseId == aitem.id
-                                        ) ? (
-                                            
-                                        ) : (
-                                            
-                                        )
-                                    )} */}
-                            </FormFieldContainer>
+                            <FormFieldContainer fieldKey="attributes">
+                                <div className="flex flex-h flex-align">
+                                    <FormFieldHeader className="list-item col col-12">
+                                        <FormFieldTitle title="Attribute" />
+                                    </FormFieldHeader>
+                                    <div
+                                        type="info"
+                                        className="list-item btn btn-info flex-end text-nowrap"
+                                        onClick={this.AddAllAttributes}
+                                    >
+                                        Alle Attribute hinzufügen
+                                    </div>
+                                </div>
 
-                            {/*
-								since no array like form input can be build with js
-								like in php this field defines the range of given attributes
-								the function which handles the submission then knows
-								how many attributes are passed and can stop without an out-of-range
-							*/}
+                                <FormFieldWrapper className="attributes list-item flex flex-v flex-item-box">
+                                    {this.props.attributeBases.map((aitem) => (
+                                        <CharacterSheetAttributeListItem
+                                            key={aitem.name}
+                                            Base={aitem}
+                                            SheetAttribute={this.GetAttribute(
+                                                aitem.id
+                                            )}
+                                            OnAdd={this.AddAttribute}
+                                            OnRemove={this.RemoveAttribute}
+                                            OnChange={this.SetAttributeValue}
+                                        />
+                                    ))}
+                                </FormFieldWrapper>
+                            </FormFieldContainer>
                             <Field
-                                name="attributesCount"
+                                name="attribute_ids"
                                 component="input"
                                 type="hidden"
-                                defaultValue={this.state.Attributes.length}
+                                defaultValue={this.GetAttributesBaseIdsString()}
                             />
                             <SubmitButton>{submitLabel}</SubmitButton>
-                            <pre>
-                                AttributesCount:
-                                {JSON.stringify(this.state.Attributes.length)}
-                            </pre>
-                            <pre>
-                                {JSON.stringify(this.state, undefined, 2)}
-                            </pre>
                         </React.Fragment>
                     )}
                 />
-                {/* <pre>{JSON.stringify(attributes, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
             </React.Fragment>
         );
     }
