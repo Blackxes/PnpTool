@@ -30,12 +30,14 @@ export const routesConfiguration = [
     },
     {
         ...new RouteModel(),
+        key: 'character_sheet',
         id: generateId(),
         path: ['/character-sheet'],
         component: <p>CharacterSheet</p>
     },
     {
         ...new RouteModel(),
+        key: 'looter',
         id: generateId(),
         path: ['/looter'],
         component: <p>Looter</p>
@@ -50,12 +52,42 @@ export const routesConfiguration = [
          */
         ...new RouteModel(),
         id: generateId(),
+        key: 'lexicon',
         path: ['/lexicon'],
         component: <p>Lexikon</p>
     },
     {
         ...new RouteModel(),
         id: generateId(),
+        key: 'lexicon/lexicon',
+        path: ['/lexicon/bestiary'],
+        component: <p>Lexikon</p>
+    },
+    {
+        ...new RouteModel(),
+        id: generateId(),
+        key: 'lexicon/minerals',
+        path: ['/lexicon/minerals'],
+        component: <p>Lexikon</p>
+    },
+    {
+        ...new RouteModel(),
+        id: generateId(),
+        key: 'lexicon/flora_fauna',
+        path: ['/lexicon/flora-fauna'],
+        component: <p>Lexikon</p>
+    },
+    {
+        ...new RouteModel(),
+        id: generateId(),
+        key: 'lexicon/crafting',
+        path: ['/lexicon/crafting'],
+        component: <p>Lexikon</p>
+    },
+    {
+        ...new RouteModel(),
+        id: generateId(),
+        key: 'settings',
         path: ['/settings'],
         component: <p>Settings</p>
     }

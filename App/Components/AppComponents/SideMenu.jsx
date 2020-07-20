@@ -21,7 +21,7 @@ export const StyledEasterEgg = styled(StyledMenuItem)`
 const SideMenu = () => {
     const location = useLocation();
 
-    const currentMenuKey = menu;
+    const currentMenuKey = location.pathname;
 
     console.log(location);
 
