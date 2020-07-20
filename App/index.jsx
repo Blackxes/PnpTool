@@ -6,32 +6,30 @@
  */
 
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import store from './Logic/store';
-
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import Root from './Components/Root';
+import { StyleSheetManager } from 'styled-components';
 
-import './Assets/app.scss';
+import store from './Logic/store';
 import { generateId } from './Logic/Source/Miscellaneous/functions';
 
-if (process.env.NODE_ENV === 'development') {
-    import('./Assets/debug.scss');
-}
+import App from './Components/App';
+import GlobalStyle from './GlobalStyle';
+
+// const doc = new GoogleSpreadsheet(
+//     '1hr1UF0CWXwdk2DpyALGOaZXGjGtny1y8TaWEFnCycF0'
+// );
 
 console.group('Random Hash Ids');
-console.log(generateId());
-console.log(generateId());
-console.log(generateId());
-console.log(generateId());
-console.log(generateId());
+for (let i = 0; i < 5; i++) console.log(generateId());
 console.groupEnd();
 
-ReactDom.render(
+render(
     <Provider store={store}>
-        <Root />
+        <GlobalStyle />
+        <StyleSheetManager disableVendorPrefixes>
+            <App />
+        </StyleSheetManager>
     </Provider>,
     document.getElementById('app')
 );
-
-// Fixme: check duplicated 'name' properties in FlatData

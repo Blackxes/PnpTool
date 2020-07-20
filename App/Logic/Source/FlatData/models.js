@@ -7,18 +7,34 @@
 
 import { generateId } from '../Miscellaneous/functions';
 
+/**
+ * base attribute from which the subclasses of attributes inherit
+ */
 export class AttributeBase {
-    constructor(name, defaultValue = null, description = '') {
-        this.id = generateId();
+    constructor(id, name, defaultValue = null, description = '') {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.defaultValue = defaultValue;
     }
 }
 
+/**
+ * attribute which has the actual value
+ */
 export class CharacterSheetAttribute {
     constructor(baseId, value = null) {
         this.baseId = baseId;
+        this.value = value;
+    }
+}
+
+/**
+ * basically a regular value but this one describes what type this value is
+ */
+export class ContextValue {
+    constructor(type, value) {
+        this.type = type;
         this.value = value;
     }
 }
