@@ -12,18 +12,36 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import MainMenu from '../../AppComponents/MainMenu';
 import SideMenu from '../../AppComponents/SideMenu';
+import ContentTabs from '../../AppComponents/ContentTabs';
+import FlexContainer from './FlexContainer';
+
+import { getMenuItems } from '../../../Logic/Menu/Functions';
 
 const StyledApplicationBody = styled.main`
     display: flex;
 `;
 
-const ApplicationBody = () => {
+const ApplicationBody = ({ path, component }) => {
+
+	// path information
+	const menuItems = 
+    const currentMenuKey = getMenuItems().find((item) =>
+        path.some((pitem) => pitem == item.path)
+	);
+
+	const currentSideMenuKey = 
+	
+
+	console.log()
+
     return (
         <StyledApplicationBody>
-            <SideMenu />
-            <MainMenu menuKey="main_menu" />
+            <SideMenu menuKey={currentMenuKey} />
+            <FlexContainer vertical>
+                <ContentTabs menuKey={currentMenuKey} parentKey />
+                {() => component || null}
+            </FlexContainer>
         </StyledApplicationBody>
     );
 };

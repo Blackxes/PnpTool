@@ -44,19 +44,26 @@ export const StyledMenuItems = styled.ul`
     ${(props) =>
         props.vertical &&
         css`
-            flex-direction: row;
+            flex-direction: column;
         `}
 `;
 
 // menu item component
 export const StyledMenuItem = styled.li`
-    & > * {
-        padding: 10px 15px;
-        display: flex;
-        text-decoration: none;
-    }
     &:hover {
         background: #b2bec3;
+    }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+    padding: 10px 15px;
+    display: flex;
+    text-decoration: none;
+    & > * {
+        margin-right: 10px;
+        &:last-child {
+            margin-right: 0;
+        }
     }
 `;
 
@@ -68,15 +75,15 @@ const Menu = ({ title, menuKey, parentKey, menuItems, vertical }) => {
         : buildMenuTree(menuKey, parentKey) || [];
 
     return (
-        <StyledMenuContainer vertical>
+        <StyledMenuContainer vertical={vertical}>
             {title && <StyledMenuTitle>{title}</StyledMenuTitle>}
             {usedItems.map((group) => (
                 <StyledMenuGroup key={group.key}>
-                    <StyledMenuItems vertical>
+                    <StyledMenuItems vertical={vertical}>
                         {group.items.map((menuItem) => (
                             <StyledMenuItem key={menuItem.key}>
-                                <NavLink
-                                    to={menuItem.route}
+                                <StyledNavLink
+                                    to={menuItem.path}
                                     exact={menuItem.exact}
                                 >
                                     {menuItem.renderPrefixArrow ? null : (
@@ -94,7 +101,7 @@ const Menu = ({ title, menuKey, parentKey, menuItems, vertical }) => {
                                     {!menuItem.renderTitle ? null : (
                                         <p>{menuItem.title}</p>
                                     )}
-                                </NavLink>
+                                </StyledNavLink>
                             </StyledMenuItem>
                         ))}
                     </StyledMenuItems>

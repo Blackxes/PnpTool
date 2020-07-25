@@ -7,7 +7,7 @@ const { merge } = require('webpack-merge');
 // common config
 const commonConfig = {
     entry: {
-        app: path.resolve(__dirname, 'App/index.jsx')
+        app: path.resolve(__dirname, 'App/index.tsx')
     },
     externals: {
         react: 'React',
@@ -29,6 +29,10 @@ const commonConfig = {
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'awesome-typescript-loader'
             },
             {
                 test: /\.jsx?$/,
@@ -56,7 +60,7 @@ const commonConfig = {
         })
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.css', '.scss']
+        extensions: ['.css', '.scss', '.ts', '.tsx', '.js', '.jsx']
     }
 };
 

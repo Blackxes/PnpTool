@@ -84,10 +84,12 @@ export const MenuItemModel = class {
 
         /**
          * target url
+         * would have been named "route" but i want to it synergize
+         * better with ReactRouterDOM's Route Component
          *
          * @var string
          */
-        this.route = '';
+        this.path = '';
 
         /**
          * menu context key

@@ -6,8 +6,8 @@
  */
 
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+// import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ApplicationHeader from './SystemComponents/Container/ApplicationHeader';
 import ApplicationBody from './SystemComponents/Container/ApplicationBody';
@@ -21,18 +21,21 @@ const App = () => {
         <React.Fragment>
             <BrowserRouter>
                 <ApplicationHeader />
-                {routes.map((route) => (
-                    <Route {...route}>
-                        <ApplicationBody />
-                    </Route>
-                ))}
+                <Switch>
+                    {routes.map((route) => (
+                        <Route {...route}>
+                            <ApplicationBody {...route} />
+                        </Route>
+                    ))}
+                </Switch>
             </BrowserRouter>
         </React.Fragment>
     );
 };
 
-const toProps = (state) => ({});
+// const toProps = (state) => ({});
 
-const toDispatch = (dispatch) => ({});
+// const toDispatch = (dispatch) => ({});
 
-export default connect(toProps, toDispatch)(App);
+// export default connect(toProps, toDispatch)(App);
+export default App;

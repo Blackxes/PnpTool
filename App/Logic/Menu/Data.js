@@ -71,77 +71,77 @@ export const menuItems = [
         ...new MenuItemModel(),
         title: 'Home',
         key: 'home',
-        route: '/',
+        path: '/',
         icon: fasHome
     },
     {
         ...new MenuItemModel(),
         title: 'Dashboard',
         key: 'dashboard',
-        route: '/dashboard',
+        path: '/dashboard',
         icon: fasBorderNone
     },
     {
         ...new MenuItemModel(),
         title: 'Map',
         key: 'map',
-        route: '/map',
+        path: '/map',
         icon: fasMapSigns
     },
     {
         ...new MenuItemModel(),
         title: 'Character Sheets',
         key: 'character_sheets',
-        route: '/character-sheets',
+        path: '/character-sheets',
         icon: fasUser
     },
     {
         ...new MenuItemModel(),
         title: 'Looter',
         key: 'looter',
-        route: '/looter',
+        path: '/looter',
         icon: fasBoxes
     },
     {
         ...new MenuItemModel(),
         title: 'Lexicon',
         key: 'lexicon',
-        route: '/lexicon',
+        path: '/lexicon',
         icon: fasBook
     },
     {
         ...new MenuItemModel(),
         title: 'Flora und Fauna',
         key: 'flora_fauna',
-        route: '/flora-fauna',
+        path: '/flora-fauna',
         icon: fasSeedling
     },
     {
         ...new MenuItemModel(),
         title: 'Mineralien',
         key: 'minerals',
-        route: '/minerals',
+        path: '/minerals',
         icon: fasGem
     },
     {
         ...new MenuItemModel(),
         title: 'Bestiarium',
         key: 'bestiary',
-        route: '/bestiary',
+        path: '/bestiary',
         icon: fasPaw
     },
     {
         ...new MenuItemModel(),
         title: 'Crafting',
         key: 'crafting',
-        route: '/crafting',
+        path: '/crafting',
         icon: farLightbulb
     },
     {
         ...new MenuItemModel(),
         title: 'Einstellungen',
         key: 'settings',
-        route: '/settings',
+        path: '/settings',
         icon: fasCogs
     }
 ];

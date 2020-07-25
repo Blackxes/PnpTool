@@ -14,21 +14,23 @@ import Menu, { StyledMenuItem } from '../SystemComponents/Menu/Menu';
 export const StyledSideMenu = styled.div``;
 
 export const StyledEasterEgg = styled(StyledMenuItem)`
-	padding: 
+    padding: 10px 15px;
     color: transparent;
+    &:hover {
+        color: inherit;
+        background: transparent;
+    }
 `;
 
-const SideMenu = () => {
+const SideMenu = ({ parentMenuKey }) => {
     const location = useLocation();
-
-    const currentMenuKey = location.pathname;
 
     console.log(location);
 
     return (
         <StyledSideMenu>
-            <StyledEasterEgg>Easteregg.. Juhuuu</StyledEasterEgg>
-            <Menu parentKey vertical menuKey="main_menu" />
+            <StyledEasterEgg>Leberwurst</StyledEasterEgg>
+            <Menu vertical parentMenuKey={parentMenuKey} menuKey="main_menu" />
         </StyledSideMenu>
     );
 };

@@ -13,6 +13,20 @@ import { MenuItemModel, MenuGroupModel } from './Models';
 import { menuConfigurations, menuItems, menuGroupItems } from './Data';
 
 /**
+ * returns build up menu items
+ * you can simply get the menu items from the './Data' export
+ * but this function is here as placeholder in case some functionalities might be added
+ * use this in case you want to possibly benefit from further features
+ * if you only need the items then get the exported ones from './Data'
+ *
+ * // Todo: implement feature
+ * @param {string} parent parent of the menu items
+ */
+export const getMenuItems = (parent) => {
+    return menuItems;
+};
+
+/**
  * creates a menu item
  *
  * @param string title - the title of the item
@@ -43,7 +57,7 @@ export const createMenuItem = (title, url, icon) => {
  * 				{
  * 					title: string,
  * 					key: string,
- * 					route: string,
+ * 					path: string,
  * 					itemOrder: int,
  * 					groupOrder: int,
  *					group: string
