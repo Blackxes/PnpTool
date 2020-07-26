@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import { joinStrings } from '../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../Logic/Miscellaneous/Functions';
 
 /**
  * takes an array of values and build a p tag Component

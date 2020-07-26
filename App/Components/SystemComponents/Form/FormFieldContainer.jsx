@@ -10,7 +10,7 @@
  */
 
 import * as React from 'react';
-import { joinStrings } from '../../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../../Logic/Miscellaneous/Functions';
 
 const FormFieldContainer = ({ fieldKey, horizontal, ...rest }) => {
     const classNames = joinStrings([

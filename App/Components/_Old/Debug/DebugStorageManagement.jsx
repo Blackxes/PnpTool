@@ -8,7 +8,7 @@
 import * as React from 'react';
 import { Button } from '../Form/Buttons';
 import { connect } from 'react-redux';
-import { joinStrings } from '../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../Logic/Miscellaneous/Functions';
 
 const InlineText = ({ text, ...rest }) => {
     return <span {...rest}>{text}</span>;
@@ -67,8 +67,10 @@ const toProps = (state) => ({
 });
 
 const toDispatch = (dispatch) => ({
-    onToggleLoadPermission: () => dispatch({ type: 'toggle-load-from-storage-permission' }),
-    onToggleSavePermission: () => dispatch({ type: 'toggle-save-to-storage-permission' })
+    onToggleLoadPermission: () =>
+        dispatch({ type: 'toggle-load-from-storage-permission' }),
+    onToggleSavePermission: () =>
+        dispatch({ type: 'toggle-save-to-storage-permission' })
 });
 
 export default connect(toProps, toDispatch)(DebugStorageManagement);

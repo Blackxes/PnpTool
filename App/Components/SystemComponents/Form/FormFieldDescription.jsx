@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import { joinStrings } from '../../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../../Logic/Miscellaneous/Functions';
 
 export const FormFieldDescription = ({ description, ...rest }) => {
     const classNames = joinStrings(['form-field-description', rest.className]);

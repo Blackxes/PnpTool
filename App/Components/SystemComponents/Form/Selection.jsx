@@ -9,7 +9,7 @@ import * as React from 'react';
 import {
     generateId,
     joinStrings
-} from '../../../Logic/Source/Miscellaneous/functions';
+} from '../../../Logic/Miscellaneous/Functions';
 
 const Selection = ({
     items,

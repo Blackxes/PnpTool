@@ -9,7 +9,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import AppTitle from '../AppTitle';
-// import MainMenu from '../../AppComponents/MainMenu';
+import MainMenu from '../../AppComponents/MainMenu';
 
 const StyledApplicationHeader = styled.header`
     padding-top: 30px;
@@ -27,7 +27,7 @@ const ApplicationHeader: React.FC<ApplicationHeaderProps> = (props) => {
     return (
         <StyledApplicationHeader>
             <AppTitle title="Daaaaaamnn" />
-            {/* <MainMenu /> */}
+            <MainMenu />
         </StyledApplicationHeader>
     );
 };

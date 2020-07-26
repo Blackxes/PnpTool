@@ -7,8 +7,6 @@
 
 import * as React from 'react';
 
-import { BuildMenuTree } from '../../Logic/Menu/Functions';
-
 import Menu from '../SystemComponents/Menu/Menu';
 
 // component

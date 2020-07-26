@@ -13,9 +13,10 @@ import ApplicationHeader from './SystemComponents/Container/ApplicationHeader';
 import ApplicationBody from './SystemComponents/Container/ApplicationBody';
 
 import { routesConfiguration } from '../Logic/Routes/Data';
+import { generateRoutes } from '../Logic/Routes/Functions';
 
 const App = () => {
-    const routes = routesConfiguration || [];
+    const routes = generateRoutes(baseRoutes);
 
     return (
         <React.Fragment>

@@ -8,16 +8,15 @@
 import { combineReducers } from 'redux';
 
 import Debug from './Source/Debug/reducer';
-import Dice from './Source/Dice/reducer';
-import FlatData from './Source/FlatData/reducer';
+// import Dice from './Source/Dice/reducer';
+// import FlatData from './Source/FlatData/reducer';
 
-const reducers = {
-    Dice,
-    FlatData
-};
+const reducers = {};
 
 if (process.env.NODE_ENV == 'development') {
     reducers.Debug = Debug;
 }
 
-export default !Object.keys(reducers).length ? () => {} : combineReducers(reducers);
+export default !Object.keys(reducers).length
+    ? () => {}
+    : combineReducers(reducers);

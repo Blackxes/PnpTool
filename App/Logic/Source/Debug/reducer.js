@@ -25,7 +25,10 @@ const Debug = (state = initialState, { type, pl }) => {
                     : state.saveToStoragePermission
             };
         case 'toggle-save-to-storage-permission':
-            return { ...state, saveToStoragePermission: !state.saveToStoragePermission };
+            return {
+                ...state,
+                saveToStoragePermission: !state.saveToStoragePermission
+            };
     }
     return state;
 };

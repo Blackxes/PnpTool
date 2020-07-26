@@ -23,23 +23,21 @@ const StyledApplicationBody = styled.main`
 `;
 
 const ApplicationBody = ({ path, component }) => {
-
-	// path information
-	const menuItems = 
-    const currentMenuKey = getMenuItems().find((item) =>
-        path.some((pitem) => pitem == item.path)
-	);
-
-	const currentSideMenuKey = 
-	
-
-	console.log()
+    // path information
+    const currentMenuItem = getMenuItems().find((item) => {
+        return path.some((pitem) => pitem == item.path);
+    });
 
     return (
         <StyledApplicationBody>
-            <SideMenu menuKey={currentMenuKey} />
+            {currentMenuItem != undefined && (
+                <SideMenu
+                    menuKey="main_menu"
+                    parentMenuKey={currentMenuItem?.key}
+                />
+            )}
             <FlexContainer vertical>
-                <ContentTabs menuKey={currentMenuKey} parentKey />
+                <ContentTabs path={path} />
                 {() => component || null}
             </FlexContainer>
         </StyledApplicationBody>

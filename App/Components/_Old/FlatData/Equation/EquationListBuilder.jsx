@@ -12,7 +12,7 @@
 
 import * as React from 'react';
 import { CreateEquationUnitButton } from './EquationListItems';
-import { generateId } from '../../../Logic/Source/Miscellaneous/functions';
+import { generateId } from '../../../Logic/Miscellaneous/Functions';
 import { EquationContext } from './EquationBuilder';
 
 import EquationItemsRenderConfig from './EquationItemsRenderConfig';

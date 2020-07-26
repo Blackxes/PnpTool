@@ -9,11 +9,12 @@ import { generateId } from '../Miscellaneous/Functions';
 
 import { TabProps } from './Interfaces';
 import { TComponentA, TComponentB, TComponentC } from './TestComponentData';
+import { DashboardKey } from '../GlobalKeys';
 
 export const Tabs: Array<TabProps> = [
     {
         id: generateId(),
-        routeKey: 'dashboard',
+        routeKey: DashboardKey,
         items: [TComponentA, TComponentB, TComponentC]
     }
 ];

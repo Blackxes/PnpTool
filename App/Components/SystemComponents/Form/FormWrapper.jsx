@@ -8,7 +8,7 @@
 import * as React from 'react';
 import { Form } from 'react-final-form';
 
-import { joinStrings } from '../../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../../Logic/Miscellaneous/Functions';
 
 /**
  * form wrapper for a react final form Form

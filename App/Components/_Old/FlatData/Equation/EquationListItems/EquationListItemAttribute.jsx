@@ -11,7 +11,7 @@ import {
     faSyncAlt as fasSyncAlt,
     faTimes as fasTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { joinStrings } from '../../../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../../../Logic/Miscellaneous/Functions';
 import { EquationContext } from '../EquationBuilder';
 
 const EquationListItemAttribute = ({ equationUnit, startEditing }) => {

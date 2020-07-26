@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Selection } from '../../../Form/FormComponents';
-import { generateId } from '../../../../Logic/Source/Miscellaneous/functions';
+import { generateId } from '../../../../Logic/Miscellaneous/Functions';
 
 // none is not listed since its the default from where you select an actual type
 const EquationItemTypes = ['attribute', 'symbol', 'constant', 'equation'];

@@ -8,7 +8,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { joinStrings } from '../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../Logic/Miscellaneous/Functions';
 
 /**
  * builds an ok button

@@ -68,11 +68,13 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 // menu container component
-const Menu = ({ title, menuKey, parentKey, menuItems, vertical }) => {
+const Menu = ({ title, menuKey, parentMenuKey, menuItems, vertical }) => {
     // menu items have higher priority
     const usedItems = menuItems?.length
         ? menuItems
-        : buildMenuTree(menuKey, parentKey) || [];
+        : buildMenuTree(menuKey, parentMenuKey) || [];
+
+    console.log(menuKey, parentMenuKey);
 
     return (
         <StyledMenuContainer vertical={vertical}>

@@ -22,15 +22,11 @@ export const StyledEasterEgg = styled(StyledMenuItem)`
     }
 `;
 
-const SideMenu = ({ parentMenuKey }) => {
-    const location = useLocation();
-
-    console.log(location);
-
+const SideMenu = ({ menuKey, parentMenuKey }) => {
     return (
         <StyledSideMenu>
             <StyledEasterEgg>Leberwurst</StyledEasterEgg>
-            <Menu vertical parentMenuKey={parentMenuKey} menuKey="main_menu" />
+            <Menu vertical parentMenuKey={parentMenuKey} menuKey={menuKey} />
         </StyledSideMenu>
     );
 };

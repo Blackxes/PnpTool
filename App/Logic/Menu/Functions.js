@@ -7,7 +7,7 @@
 
 import _ from 'lodash';
 
-import { keyifyString } from '../Source/Miscellaneous/functions';
+import { keyifyString } from '../Miscellaneous/Functions';
 
 import { MenuItemModel, MenuGroupModel } from './Models';
 import { menuConfigurations, menuItems, menuGroupItems } from './Data';
@@ -74,6 +74,8 @@ export const createMenuItem = (title, url, icon) => {
  * @return array - the menu level
  */
 export const buildMenuTree = (menuKey, parent) => {
+    if (!menuKey) throw new Error('No menukey given.');
+
     if (!_.has(menuConfigurations, menuKey))
         throw new Error(`Menu ${menuKey} not found`);
 

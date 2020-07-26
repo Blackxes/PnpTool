@@ -6,8 +6,7 @@
  */
 
 import { all } from 'redux-saga/effects';
-import { OnCharacterSheetCreateSubmission } from './Source/FlatData/watchers';
 
 export default function* rootSaga() {
-    yield all([OnCharacterSheetCreateSubmission()]);
+    yield all([]);
 }

@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import { StyleSheetManager } from 'styled-components';
 
 import store from './Logic/store';
-import { generateId } from './Logic/Source/Miscellaneous/functions';
+import { generateId } from './Logic/Miscellaneous/Functions';
 
 import App from './Components/App';
 import GlobalStyle from './GlobalStyle';

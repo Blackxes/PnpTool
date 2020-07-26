@@ -26,6 +26,8 @@ import {
     MenuItemModel
 } from './Models';
 
+import { DashboardKey, RandomizerKey } from '../GlobalKeys';
+
 /**
  * menu configurations
  */
@@ -35,30 +37,47 @@ export const menuConfigurations = {
         items: [
             {
                 ...new MenuItemConfigModel(),
-                key: 'home',
-                group: 'general',
-                renderTitle: false
+                key: DashboardKey
             },
             {
                 ...new MenuItemConfigModel(),
-                key: 'bestiary',
-                group: 'general'
+                key: RandomizerKey
             },
             {
                 ...new MenuItemConfigModel(),
-                key: 'character_sheets',
-                group: 'general'
+                key: 'TestA',
+                parent: DashboardKey
             },
+            {
+                ...new MenuItemConfigModel(),
+                key: 'TestB',
+                parent: DashboardKey
+            },
+            {
+                ...new MenuItemConfigModel(),
+                key: 'TestC',
+                parent: DashboardKey
+            },
+            {
+                ...new MenuItemConfigModel(),
+                key: 'TestD',
+                parent: RandomizerKey
+            },
+            {
+                ...new MenuItemConfigModel(),
+                key: 'TestE',
+                parent: RandomizerKey
+            },
+            {
+                ...new MenuItemConfigModel(),
+                key: 'TestD',
+                parent: RandomizerKey
+            }
             // {
             //     ...new MenuItemConfigModel(),
             //     key: 'crafting',
             //     group: 'creation'
             // },
-            {
-                ...new MenuItemConfigModel(),
-                key: 'map',
-                parent: 'crafting'
-            }
         ]
     }
 };
@@ -69,81 +88,116 @@ export const menuConfigurations = {
 export const menuItems = [
     {
         ...new MenuItemModel(),
-        title: 'Home',
-        key: 'home',
-        path: '/',
-        icon: fasHome
-    },
-    {
-        ...new MenuItemModel(),
         title: 'Dashboard',
-        key: 'dashboard',
+        key: DashboardKey,
         path: '/dashboard',
         icon: fasBorderNone
     },
     {
         ...new MenuItemModel(),
-        title: 'Map',
-        key: 'map',
-        path: '/map',
-        icon: fasMapSigns
+        title: 'Randomizer',
+        key: RandomizerKey,
+        path: '/randomizer'
     },
     {
         ...new MenuItemModel(),
-        title: 'Character Sheets',
-        key: 'character_sheets',
-        path: '/character-sheets',
-        icon: fasUser
+        title: 'TestA',
+        key: 'TestA',
+        path: '/testa'
     },
     {
         ...new MenuItemModel(),
-        title: 'Looter',
-        key: 'looter',
-        path: '/looter',
-        icon: fasBoxes
+        title: 'TestB',
+        key: 'TestB',
+        path: '/testb'
     },
     {
         ...new MenuItemModel(),
-        title: 'Lexicon',
-        key: 'lexicon',
-        path: '/lexicon',
-        icon: fasBook
+        title: 'TestC',
+        key: 'TestC',
+        path: '/testc'
     },
     {
         ...new MenuItemModel(),
-        title: 'Flora und Fauna',
-        key: 'flora_fauna',
-        path: '/flora-fauna',
-        icon: fasSeedling
+        title: 'TestD',
+        key: 'TestD',
+        path: '/testd'
     },
     {
         ...new MenuItemModel(),
-        title: 'Mineralien',
-        key: 'minerals',
-        path: '/minerals',
-        icon: fasGem
+        title: 'TestE',
+        key: 'TestE',
+        path: '/teste'
     },
     {
         ...new MenuItemModel(),
-        title: 'Bestiarium',
-        key: 'bestiary',
-        path: '/bestiary',
-        icon: fasPaw
-    },
-    {
-        ...new MenuItemModel(),
-        title: 'Crafting',
-        key: 'crafting',
-        path: '/crafting',
-        icon: farLightbulb
-    },
-    {
-        ...new MenuItemModel(),
-        title: 'Einstellungen',
-        key: 'settings',
-        path: '/settings',
-        icon: fasCogs
+        title: 'TestF',
+        key: 'TestF',
+        path: '/testf'
     }
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Map',
+    //     key: 'map',
+    //     path: '/map',
+    //     icon: fasMapSigns
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Character Sheets',
+    //     key: 'character_sheets',
+    //     path: '/character-sheets',
+    //     icon: fasUser
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Looter',
+    //     key: 'looter',
+    //     path: '/looter',
+    //     icon: fasBoxes
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Lexicon',
+    //     key: 'lexicon',
+    //     path: '/lexicon',
+    //     icon: fasBook
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Flora und Fauna',
+    //     key: 'flora_fauna',
+    //     path: '/flora-fauna',
+    //     icon: fasSeedling
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Mineralien',
+    //     key: 'minerals',
+    //     path: '/minerals',
+    //     icon: fasGem
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Bestiarium',
+    //     key: 'bestiary',
+    //     path: '/bestiary',
+    //     icon: fasPaw
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Crafting',
+    //     key: 'crafting',
+    //     path: '/crafting',
+    //     icon: farLightbulb
+    // },
+    // {
+    //     ...new MenuItemModel(),
+    //     title: 'Einstellungen',
+    //     key: 'settings',
+    //     path: '/settings',
+    //     icon: fasCogs
+    // }
 ];
 
 /**

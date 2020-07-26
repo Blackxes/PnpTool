@@ -12,3 +12,10 @@ export interface RouteConfigurationItemProps extends RouteProps {
     key: string;
     title?: string;
 }
+
+export interface RouteGenerationConfigurationItem extends RouteProps {
+    id: string;
+    key: string;
+    title?: string;
+    parentKey: string;
+}

@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 import DebugStorageManagement from './DebugStorageManagement';
-import { joinStrings } from '../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../Logic/Miscellaneous/Functions';
 import { Button } from '../Form/Buttons';
 import { connect } from 'react-redux';
 

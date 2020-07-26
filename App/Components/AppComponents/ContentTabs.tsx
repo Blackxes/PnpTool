@@ -16,7 +16,8 @@ interface ContentTabsProps {
 }
 
 const ContentTabs: React.FC<ContentTabsProps> = (props) => {
-    const menuItems = buildMenuTree(props.menuKey, props.parentKey);
+    const menuItems =
+        props.menuKey && buildMenuTree(props.menuKey, props.parentKey);
 
     return <pre>{JSON.stringify(menuItems, undefined, 2)}</pre>;
 };

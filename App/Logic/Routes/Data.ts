@@ -8,26 +8,28 @@
 
 import * as React from 'react';
 
-import { generateId } from '../Source/Miscellaneous/functions';
+import { generateId } from '../Miscellaneous/Functions';
 import { RouteConfigurationItemProps } from './Interfaces';
+import { DashboardKey, RandomizerKey } from '../GlobalKeys';
+
 import Dashboard from '../../Components/AppComponents/Dashboard';
 import Randomizer from '../../Components/AppComponents/Randomizer';
 
 /**
  * routes of this app
  */
-export const routesConfiguration: Array<RouteConfigurationItemProps> = [
+export const baseRoutes: Array<RouteConfigurationItemProps> = [
     {
         id: generateId(),
-        key: 'dashboard',
-        path: ['/', 'dashboard'],
+        key: DashboardKey,
+        path: ['/', '/dashboard'],
         exact: true,
         component: Dashboard
     },
     {
         id: generateId(),
-        key: 'Randomizer',
-        path: ['randomizer'],
+        key: RandomizerKey,
+        path: ['/randomizer'],
         component: Randomizer
     }
     // {

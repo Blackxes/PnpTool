@@ -24,7 +24,7 @@ import {
     findInArray,
     joinStrings,
     someInArray
-} from '../../Logic/Source/Miscellaneous/functions';
+} from '../../Logic/Miscellaneous/Functions';
 import {
     faPlus as FasPlus,
     faMinus as FasMinus

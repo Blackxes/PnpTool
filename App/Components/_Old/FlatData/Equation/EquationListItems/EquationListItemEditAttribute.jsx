@@ -12,7 +12,7 @@ import {
     faTrash as fasTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { Selection } from '../../../Form/FormComponents';
-import { joinStrings } from '../../../../Logic/Source/Miscellaneous/functions';
+import { joinStrings } from '../../../../Logic/Miscellaneous/Functions';
 
 const EquationListItemEditAttribute = ({
     equationUnit,
