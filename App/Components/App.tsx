@@ -9,29 +9,32 @@ import * as React from 'react';
 // import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import ApplicationHeader from './SystemComponents/Container/ApplicationHeader';
-import ApplicationBody from './SystemComponents/Container/ApplicationBody';
+// import ApplicationHeader from './SystemComponents/Container/ApplicationHeader';
+// import ApplicationBody from './SystemComponents/Container/ApplicationBody';
 
-import { routesConfiguration } from '../Logic/Routes/Data';
-import { generateRoutes } from '../Logic/Routes/Functions';
+// import { routesConfiguration } from '../Logic/Routes/Data';
+// import { generateRoutes } from '../Logic/Routes/Functions';
+import { generateMenuRouteConfiguration } from '../Logic/Menu/Functions';
 
 const App = () => {
-    const routes = generateRoutes(baseRoutes);
+    const menuRoutes = generateMenuRouteConfiguration('main_menu', 'dashboard');
 
-    return (
-        <React.Fragment>
-            <BrowserRouter>
-                <ApplicationHeader />
-                <Switch>
-                    {routes.map((route) => (
-                        <Route {...route}>
-                            <ApplicationBody {...route} />
-                        </Route>
-                    ))}
-                </Switch>
-            </BrowserRouter>
-        </React.Fragment>
-    );
+    return <p>Apfel</p>;
+
+    // return (
+    //     <React.Fragment>
+    //         <BrowserRouter>
+    //             <ApplicationHeader />
+    //             <Switch>
+    //                 {routes.map((route) => (
+    //                     <Route {...route}>
+    //                         <ApplicationBody {...route} />
+    //                     </Route>
+    //                 ))}
+    //             </Switch>
+    //         </BrowserRouter>
+    //     </React.Fragment>
+    // );
 };
 
 // const toProps = (state) => ({});

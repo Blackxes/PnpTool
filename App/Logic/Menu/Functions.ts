@@ -70,10 +70,11 @@ export const createMenuItem = (title, url, icon) => {
  * @param string menuName - identifier from where the menu configurations should be taken
  * @param string parent - parent of the level which should be built
  * 	when null the roots are being built
+ * @param bool recursive - defines whether to generate the current level or consider building children
  *
  * @return array - the menu level
  */
-export const buildMenuTree = (menuKey, parent) => {
+export const buildMenuTree = (menuKey, parent, recursive = true) => {
     if (!menuKey) throw new Error('No menukey given.');
 
     if (!_.has(menuConfigurations, menuKey))
@@ -128,9 +129,10 @@ export const buildMenuTree = (menuKey, parent) => {
                 ...current,
                 order: current.order || 9999,
                 group: group ? group : new MenuGroupModel(),
-                children: !children.length
-                    ? []
-                    : buildMenuTree(menuKey, current.key)
+                children:
+                    recursive && children.length
+                        ? buildMenuTree(menuKey, current.key)
+                        : []
             }
         });
 
@@ -151,4 +153,36 @@ export const buildMenuTree = (menuKey, parent) => {
     });
 
     return movedGroup;
+};
+
+/**
+ * completes a menu items path by prepending the parents paths of this menu item
+ */
+export const generateMenuItemParentPath = (menuKey) => {
+    console.log(menuKey);
+};
+
+/**
+ * converts a menu configuration level of menuConfigurations to a route configuration
+ */
+export const generateMenuRouteConfiguration = (
+    menuKey: string,
+    parent: string = undefined
+) => {
+    // correct parent // items may be adjusted later on
+    let items = menuConfigurations[menuKey]?.items.filter(
+        (item) => item.parent == parent
+    );
+
+    // generate paths when not super items (super items are menu items without parents)
+    if (parent) {
+    }
+
+    // console.log(menuKey);
+    // console.log(parent);
+
+    console.log(items);
+
+    return true;
+    // const items
 };

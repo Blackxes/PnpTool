@@ -70,7 +70,7 @@ export const menuConfigurations = {
             },
             {
                 ...new MenuItemConfigModel(),
-                key: 'TestD',
+                key: 'TestF',
                 parent: RandomizerKey
             }
             // {
